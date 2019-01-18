@@ -1,3 +1,5 @@
+// Swift Tour : Detailed Practice from chapter
+
 // simple print statement
 print("Hello, world!")
 
@@ -113,3 +115,81 @@ case "Tomato", "Cherries":
 default : print("Why does color bother you ?") // commenting this gives error : "switch must be exhaustive"
 }
 
+//FOR-IN Loop , for searching in the dictionaries
+
+// E:5
+var interestingNumbers = [
+    "prime" : [2,3,5,7,11],
+    "fibonacci" : [1,1,2,3,5,8],
+    "Square" : [1,4,9,16,25]
+]
+
+var largest = 0
+var type:String = "prime"
+
+for (kind,numbers) in interestingNumbers {
+    for number in numbers {
+        if number > largest {
+            largest = number
+            type = kind
+        }
+    }
+}
+
+print("\(largest) is the maximum value and it is a \(type)" )
+
+//while loop
+var m = 2
+while m < 100{
+    m*=2
+}
+print(m)
+
+//repeat while : so that atleast once the loop is run :  checking condition at the end
+var n = 2
+repeat{
+    n*=2
+}while n < 100
+
+print(n)
+
+// ranges excluding the upper bound
+for i in 0..<4{
+    print(i)
+}
+
+// including upper bound
+for i in 0...4{
+    print(i)
+}
+
+// FUNCTIONS AND CLOSURES
+
+// func function_name(arg1 : type1, arg2:type2 .....) -> return type { Body of the function }
+func greet(name:String, day:String) -> String{
+    return "Hello \(name). Today is \(day)"
+}
+
+print(greet( name : "Vipin", day : "Monday"))
+
+// E:6
+func greet(name:String, lunchSpecial:String) -> String{
+    return "Hello \(name). Today's lunch special is \(lunchSpecial)"
+}
+
+print(greet( name : "Vipin", lunchSpecial: "Aloo Tikki"))
+
+// using no label or custom labels for the arguments
+func greetWithoutLabel(_ name:String,_ day:String) -> String{
+    return "Hello \(name). Today is \(day)"
+}
+
+print(greetWithoutLabel("Smrity","Monday"))
+
+func greetCustom(n name:String,d day:String) -> String{
+    return "Hello \(name). Today is \(day)"
+}
+
+print(greetCustom(n:"Smrity", d: "Tuesday"))
+
+//Multiple Return
