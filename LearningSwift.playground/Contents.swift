@@ -228,3 +228,20 @@ print(functionInsideFunction(num: 4))
 
 // First Class Type : Can return a fucntion : Designing a function which would return based on a case value
 
+func makeFunction(choice: Int) -> ((Int) -> Int) {
+    switch choice {
+    case 1 :
+        func addOne(num: Int) -> Int {
+            return num+1
+        }
+        return addOne
+    default :
+        func mulOne(num: Int) -> Int {
+            return num*num
+        }
+        return mulOne
+    }
+}
+
+var functionNew = makeFunction(choice: 2)
+functionNew(4)
