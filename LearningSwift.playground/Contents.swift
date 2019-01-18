@@ -192,4 +192,39 @@ func greetCustom(n name:String,d day:String) -> String{
 
 print(greetCustom(n:"Smrity", d: "Tuesday"))
 
-//Multiple Return
+// Multiple Return using Tuple
+func StatisticalCalculator(numbers:[Int]) -> (max: Int, min: Int, sum: Int) {
+    var minimum = numbers[0]
+    var maximum = numbers[0]
+    var summation = 0
+    
+    for i in numbers {
+        if i > maximum {
+            maximum = i
+        }
+        if i < minimum {
+            minimum = i
+        }
+        summation += i
+    }
+    
+    return ( maximum, minimum, summation)
+}
+
+let result = StatisticalCalculator(numbers: [4,5,6,2,7,1,9,21,87,43])
+print(" Max = \(result.0) \n Min = \(result.min) \n Sum = \(result.2) ")
+
+// Nested Functions
+func functionInsideFunction(num : Int) -> Int {
+    var y = num
+    func addOne() {
+        y += 1
+    }
+    addOne()
+    return y
+}
+
+print(functionInsideFunction(num: 4))
+
+// First Class Type : Can return a fucntion : Designing a function which would return based on a case value
+
