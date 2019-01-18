@@ -245,3 +245,56 @@ func makeFunction(choice: Int) -> ((Int) -> Int) {
 
 var functionNew = makeFunction(choice: 2)
 functionNew(4)
+
+// something  :/
+var 😏 = "Ahaaann "
+print(😏)
+
+// function as argument
+
+func sum(list: [Int], cond: (Int)-> Bool ) -> Int {
+  var summ = 0
+    for item in list {
+        if cond(item) {
+            summ += item
+        }
+    }
+    return summ
+}
+
+func testing(num: Int) -> Bool {
+    return num < 25
+}
+
+sum(list: [23,45,65,32,22,32,11] ,cond: testing)
+
+// Closure : block of code that can be called later : given as ({}) and the body  is separated from the arguments using in keyword
+
+// E:7
+var numbers = [ 20, 27, 17, 2]
+numbers.map({ (number: Int) -> [Int] in
+    var result = [Int]()
+    for item in numbers {
+        if item % 2 == 1 {
+            result.append(0)
+        } else {
+            result.append(1)
+        }
+    }
+    return result
+})
+
+// .map is used to write closure
+// return and argument type can be omitted for simplicity if delegated value is known
+
+let mappedNumbers = numbers.map({ number in 3 * number })
+print(mappedNumbers)
+
+// A closure passed as the last argument to a function can appear immediately after the parentheses
+// when a closure is the only argument , parentheses can be omitted entirely
+
+let  sortedNumbers = numbers.sorted { $0 > $1 }
+print(sortedNumbers)
+
+// OBJECTS AND CLASSES
+
