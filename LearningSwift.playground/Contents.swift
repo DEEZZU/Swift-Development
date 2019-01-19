@@ -298,3 +298,82 @@ print(sortedNumbers)
 
 // OBJECTS AND CLASSES
 
+//E:8
+class Shape {
+    var numberOfSides = 0
+    let pi = 3.14
+    func simpleDescription() -> String {
+        return "Its a simple shape with \(numberOfSides) sides"
+    }
+    func addSides(s:Int) -> Int {
+        numberOfSides = s
+        return 1
+    }
+}
+
+// creating object of the class
+
+var shape = Shape()
+var status = shape.addSides(s: 3)
+var desc = shape.simpleDescription()
+print(desc)
+
+
+// Initialization or Instantiation of the Class : init to create one
+// self is the this pointer of the class ?? perhaps
+
+class NamedShape {
+    var numberOfSides = 0
+    var name:String
+    
+    init(name:String) {
+        self.name = name
+    }
+    
+    func simpleDescription() -> String {
+        return "Its a \(name) with \(numberOfSides) sides"
+    }
+    
+}
+
+// deinit for cleanup before the object is deallocated
+// all class concepts like inheritance , destructor , polymorphism using override word
+
+class Square: NamedShape {
+    var sideLength: Double
+    
+    init(sL:Double, name:String){
+        self.sideLength = sL
+        super.init(name: name)
+        numberOfSides = 4
+    }
+    
+    func area() -> Double { return sideLength*sideLength }
+    override func simpleDescription() -> String {
+        return "Its a square called as \(name) and area =\(self.area())"
+    }
+}
+
+let test = Square(sL: 5.2, name: "New Square")
+test.simpleDescription()
+
+//E:9
+class Circle:NamedShape {
+    var radius:Double = 0
+    let pi:Double = 3.14
+    
+    init(r:Double, name:String ){
+        radius = r
+        super.init(name: name)
+    }
+    
+    func area() -> Double { return pi*radius*radius }
+    override func simpleDescription() -> String {
+        return "Its a circle of radius = \(radius) and area = \(area()). We named it \(name)."
+    }
+}
+
+let circleObj = Circle(r: 7, name: "RainBow")
+print(circleObj.simpleDescription())
+
+// Getter and Setter Functions 
