@@ -376,4 +376,68 @@ class Circle:NamedShape {
 let circleObj = Circle(r: 7, name: "RainBow")
 print(circleObj.simpleDescription())
 
-// Getter and Setter Functions 
+// Getter and Setter Functions
+
+/* properties can have getter and setter */
+class EquilateralTriangle : NamedShape {
+    var sideLength:Double = 0.0
+    init(_ length: Double,_ name:String) {
+        self.sideLength = length
+        super.init(name: name)
+        numberOfSides = 3
+    }
+    
+    var perimeter:Double {
+        get{
+            return 3.0*sideLength
+        }
+        set{
+            sideLength = newValue / 3.0 //new value is what ?? it is the implicit name : we can change this name
+        }
+    }
+    
+    override func simpleDescription() -> String {
+        return "Its a triangle of equal sides"
+    }
+}
+
+
+var triangleObject = EquilateralTriangle(4.5,"Triangle 1")
+print( triangleObject.perimeter )
+triangleObject.perimeter = 35
+print(triangleObject.sideLength) // updated according to new value of perimeter
+
+// willset and didset are used to provide value of the property that may be set before or after a new value
+
+class TriangleAndSquare {
+    var triangle: EquilateralTriangle {
+        willSet{
+            square.sideLength = newValue.sideLength
+        }
+    }
+        var square :Square {
+            willSet{
+                triangle.sideLength=newValue.sideLength
+            }
+        }
+    
+    init(size:Double , name : String){
+        square = Square(sL: size, name: name)
+        triangle = EquilateralTriangle(size,name)
+    }
+}
+
+var triAndSqrObj = TriangleAndSquare(size: 10, name: "testing")
+triAndSqrObj.square = Square(sL: 12, name: "changed")
+print(triAndSqrObj.square.sideLength)
+print(triAndSqrObj.square.name)
+print(triAndSqrObj.triangle.sideLength)
+print(triAndSqrObj.triangle.name) // name wasnt updated accordingly when the square's name was changed as it wasnt mentioned in the willset
+
+// optionals in the class
+
+var squareObj:Square? = nil //Square(sL: 5.2, name: "Square 1")
+print(squareObj?.sideLength ?? 5)
+
+// ENUMERATIONS AND STRUCTURES
+
