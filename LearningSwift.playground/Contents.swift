@@ -172,7 +172,7 @@ func greet(name:String, day:String) -> String{
 
 print(greet( name : "Vipin", day : "Monday"))
 
-// E:6
+// E:7
 func greet(name:String, lunchSpecial:String) -> String{
     return "Hello \(name). Today's lunch special is \(lunchSpecial)"
 }
@@ -298,7 +298,7 @@ print(sortedNumbers)
 
 // OBJECTS AND CLASSES
 
-//E:8
+//E:
 class Shape {
     var numberOfSides = 0
     let pi = 3.14
@@ -357,7 +357,7 @@ class Square: NamedShape {
 let test = Square(sL: 5.2, name: "New Square")
 test.simpleDescription()
 
-//E:9
+//E:10
 class Circle:NamedShape {
     var radius:Double = 0
     let pi:Double = 3.14
@@ -440,4 +440,42 @@ var squareObj:Square? = nil //Square(sL: 5.2, name: "Square 1")
 print(squareObj?.sideLength ?? 5)
 
 // ENUMERATIONS AND STRUCTURES
+// enum to create an enumeration , they too have methoda associated with them
 
+enum Rank:Int {
+    case ace = 1 //explicity changed value from 0 to 1
+    case two, three, four, five, six, seven, eigth, nine, ten
+    case jack, queen, king
+    
+    func simpleDesc() ->String {
+        switch self {
+        case .ace:
+            return "ace"
+        case .jack:
+            return "jack"
+        case .queen:
+            return "queen"
+        case .king:
+            return "king"
+        default :
+            return String(self.rawValue) // rawValue ?? it returns the associated integer inside the enum
+        }
+    }
+    // E:11
+    func compareRank(value1:Rank, value2:Rank) {
+        if value1.rawValue == value2.rawValue {
+            print("Equal")
+        } else {
+            print("Not Equal")
+        }
+    }
+    
+}
+
+let ace = Rank.ace
+let rankObj = Rank.five
+rankObj.compareRank(value1: rankObj, value2: ace)
+let aceRawValue = ace.rawValue
+
+let Object = Rank(rawValue: 2)
+// its a init?() because we donot know if it will return case or nil as case may not be there according to the rawValue
