@@ -479,3 +479,104 @@ let aceRawValue = ace.rawValue
 
 let Object = Rank(rawValue: 2)
 // its a init?() because we donot know if it will return case or nil as case may not be there according to the rawValue
+
+
+
+// cases where the rawvalue have no meaning
+
+enum Suit: Int {
+    case spades, hearts, diamonds, clubs
+    
+    func simpleDesc() -> String {
+        switch self {
+        case .spades :
+            return "spades"
+        case .hearts :
+            return "hearts"
+        case .clubs:
+            return "clubs"
+        case .diamonds:
+            return "diamonds"
+        }
+    }
+    // E:12
+    func color() -> String{
+        switch self {
+        case .spades :
+            return "black"
+        case .hearts :
+            return "red"
+        case .clubs:
+            return "black"
+        case .diamonds:
+            return "red"
+        }
+    }
+}
+
+
+let hearts = Suit.hearts
+let heartsDesc = hearts.simpleDesc()
+let heartColor = hearts.color()
+
+
+// Associated values behave like stored properties of the enumeration case instance
+
+enum ServerResponse {
+    case result(String, String)
+    case failure(String)
+    case process(String)
+}
+
+let success = ServerResponse.result("6:00 am", "8:09 pm")
+let processing = ServerResponse.process("In middle of processing")
+let failure = ServerResponse.failure("Out of cheese")
+
+// E:13
+switch processing {
+case let .result(sunrise,sunset):
+    print("Sunrise is at \(sunrise) and sunset is at \(sunset).")
+case let .process(message):
+    print("\(message)")
+case let .failure(message):
+    print("Failure...... \(message)")
+}
+
+// STRUCTURE
+
+// structure are always copied while classes pass by reference
+
+struct Card {
+    var rank: Rank
+    var suit: Suit
+    
+    func simpleDesc() -> String {
+        return "The \(rank.simpleDesc()) of \(suit.simpleDesc())"
+    }
+}
+
+let threeOfSpades = Card(rank: .three, suit: .spades)
+print(threeOfSpades.simpleDesc())
+
+// E: 14  : print all combinations of rank X suit 😒
+// how to iterate the cases when they have same value
+func deckOfCards()-> [String] {
+    var arrayOfDeck = [String]()
+    for i in 0...3 {
+        for j in 1...13 {
+            var rankObj = Rank(rawValue:j)
+            var suitObj = Suit(rawValue:i)
+            var rankDesc = rankObj?.simpleDesc() ?? "card number"
+            var suitDesc = suitObj?.simpleDesc() ?? "suit"
+            arrayOfDeck.append(rankDesc+" of "+suitDesc)
+        }
+    }
+    return arrayOfDeck
+}
+
+var resultList = deckOfCards()
+// print(resultList)
+
+
+// PROTOCOLS AND EXTENSIONS
+
