@@ -564,10 +564,10 @@ func deckOfCards()-> [String] {
     var arrayOfDeck = [String]()
     for i in 0...3 {
         for j in 1...13 {
-            var rankObj = Rank(rawValue:j)
-            var suitObj = Suit(rawValue:i)
-            var rankDesc = rankObj?.simpleDesc() ?? "card number"
-            var suitDesc = suitObj?.simpleDesc() ?? "suit"
+            let rankObj = Rank(rawValue:j)
+            let suitObj = Suit(rawValue:i)
+            let rankDesc = rankObj?.simpleDesc() ?? "card number"
+            let suitDesc = suitObj?.simpleDesc() ?? "suit"
             arrayOfDeck.append(rankDesc+" of "+suitDesc)
         }
     }
@@ -588,6 +588,8 @@ protocol ExampleProtocol {
     mutating func adjust()
     
 }
+
+
 // E : 15
 // class, structure or enum : all can adopt the protocol version
 
@@ -599,6 +601,10 @@ class SimpleClass : ExampleProtocol {
         simpleDesc += "mutated by a function : adjust()" // it doesnot need to mention mutating as class function can always modify
     }
 }
+
+let aProtocolInstance:ExampleProtocol = SimpleClass()
+//print(aProtocolInstance.anotherProp)
+
 
 var exampleClass = SimpleClass()
 exampleClass.adjust()
@@ -653,3 +659,7 @@ extension Double : ProtocolAbsolute {
 
 print(7.14.absoluteValue)
 
+// protocol name can be used like any other named type :  a collection of objects that conforms to that protocol and have different types  for example the class and structure in the above examples
+// methods outside protocol type are not visible , that is though simpleClass is a runtime type of protocol , its property is not visible to Example Protocol instances , hence protecting data from accidental access
+
+// ERROR HANDLING 
