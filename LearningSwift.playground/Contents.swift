@@ -580,3 +580,76 @@ var resultList = deckOfCards()
 
 // PROTOCOLS AND EXTENSIONS
 
+// a astrict rule kind of thing , a certain structure a class declartion must follow : hence the name protocol
+
+protocol ExampleProtocol {
+    var simpleDesc: String { get }
+    //var newReqr:Int { get }
+    mutating func adjust()
+    
+}
+// E : 15
+// class, structure or enum : all can adopt the protocol version
+
+class SimpleClass : ExampleProtocol {
+    var simpleDesc: String = "A simple class"
+   // var newReqr: Int = 1
+    var anotherProp: Int = 1111
+    func adjust() {
+        simpleDesc += "mutated by a function : adjust()" // it doesnot need to mention mutating as class function can always modify
+    }
+}
+
+var exampleClass = SimpleClass()
+exampleClass.adjust()
+let description = exampleClass.simpleDesc
+
+
+// structure using protocol
+
+struct SimpleStructure : ExampleProtocol {
+    var simpleDesc: String = "A structure"
+ //   var newReqr: Int = 2
+    mutating func adjust() {
+        simpleDesc += " mutated."
+    }
+}
+
+var exampleStructure = SimpleStructure()
+exampleStructure.adjust()
+let descriptionStruct = exampleStructure.simpleDesc
+
+// we had to add the variable added in the protocol
+
+
+// extension : it is used to add functionality to an already existing type , such as a new methods and computed properties
+
+// useful when you imported a type from a library or framework or for addding a protocol conformance to a type that is declared elsewhere
+
+
+extension Int: ExampleProtocol {
+    var simpleDesc: String {
+        return "The number \(self)"
+    }
+    mutating func adjust() {
+        self += 42
+    }
+}
+
+// The extension gave an error when protocol already had an integer in it . We are adding properties to already existing integer type of swift unresolvable recursion ??
+
+print(7.simpleDesc)
+
+
+// E: 16
+
+protocol ProtocolAbsolute {
+    var absoluteValue: Int {get}
+}
+
+extension Double : ProtocolAbsolute {
+    var absoluteValue:Int { return Int(abs(self)) }
+}
+
+print(7.14.absoluteValue)
+
