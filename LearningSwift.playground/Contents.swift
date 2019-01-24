@@ -662,4 +662,78 @@ print(7.14.absoluteValue)
 // protocol name can be used like any other named type :  a collection of objects that conforms to that protocol and have different types  for example the class and structure in the above examples
 // methods outside protocol type are not visible , that is though simpleClass is a runtime type of protocol , its property is not visible to Example Protocol instances , hence protecting data from accidental access
 
-// ERROR HANDLING 
+// ERROR HANDLING
+
+// error protocol can be adopted by any type
+enum PrinterError : Error {
+    case outOfPaper
+    case noToner
+    case onFire
+}
+
+// use throw to throw an error and throws for marking a function which can possibly throw an error
+
+func send(job:Int, toPrinter printerName: String) throws -> String {
+    if printerName == "Never has a toner" {
+        throw PrinterError.noToner
+    }
+    if printerName == "Gutenberg" {
+        throw PrinterError.onFire // Experiment : 18
+    }
+    return "Job Sent"
+}
+
+// handling errors : do-catch block
+// Experiment : 17
+do {
+    var printerStatus = try send(job: 1, toPrinter: "Never has a toner") // statement that can throw the array
+}
+catch{
+    print(error) // automatically called error
+}
+
+
+// multiple catch for handling different errors : catch is written just like cases after switch statement
+
+// Experiment : 18
+do {
+    let printerResponse = try send(job: 1040, toPrinter: "")
+    print(printerResponse)
+}
+catch PrinterError.onFire {
+    print ("Alooooo Tikkkiiii is on Fire. Vipin Burn 3:)") // Gutenberg
+}
+catch let printerError as PrinterError {
+    print ("Printer Error : \(printerError)") // Never has a toner
+}
+catch {
+    print (error) // an uspecified error will cause this
+}
+
+// try?  to convert the result to optional : nil if error thrown
+
+let printerFailure = try? send(job: 11100, toPrinter: "Never has a toner")
+
+//defer : executed after all the code just before fucntion returns :
+// its  the setup and cleanup code : even though executed aat different times
+// whether or not function throws the error
+
+var fridgeIsOpen = false
+let fridgeContents = ["milk", "eggs", "leftovers"]
+
+func fridgeContains (_ food:String) -> Bool {
+    fridgeIsOpen = true
+//    defer {
+//        fridgeIsOpen = false
+//    }
+    
+    let result = fridgeContents.contains(food)
+    return result
+}
+
+fridgeContains("banana")
+print(fridgeIsOpen)
+
+// GENERICS
+
+
