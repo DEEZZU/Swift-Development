@@ -662,4 +662,135 @@ print(7.14.absoluteValue)
 // protocol name can be used like any other named type :  a collection of objects that conforms to that protocol and have different types  for example the class and structure in the above examples
 // methods outside protocol type are not visible , that is though simpleClass is a runtime type of protocol , its property is not visible to Example Protocol instances , hence protecting data from accidental access
 
-// ERROR HANDLING 
+// ERROR HANDLING
+
+// error protocol can be adopted by any type
+enum PrinterError : Error {
+    case outOfPaper
+    case noToner
+    case onFire
+}
+
+// use throw to throw an error and throws for marking a function which can possibly throw an error
+
+func send(job:Int, toPrinter printerName: String) throws -> String {
+    if printerName == "Never has a toner" {
+        throw PrinterError.noToner
+    }
+    if printerName == "Gutenberg" {
+        throw PrinterError.onFire // Experiment : 18
+    }
+    return "Job Sent"
+}
+
+// handling errors : do-catch block
+// Experiment : 17
+do {
+    var printerStatus = try send(job: 1, toPrinter: "Never has a toner") // statement that can throw the array
+}
+catch{
+    print(error) // automatically called error
+}
+
+
+// multiple catch for handling different errors : catch is written just like cases after switch statement
+
+// Experiment : 18
+do {
+    let printerResponse = try send(job: 1040, toPrinter: "")
+    print(printerResponse)
+}
+catch PrinterError.onFire {
+    print ("Alooooo Tikkkiiii is on Fire. Vipin Burn 3:)") // Gutenberg
+}
+catch let printerError as PrinterError {
+    print ("Printer Error : \(printerError)") // Never has a toner
+}
+catch {
+    print (error) // an uspecified error will cause this
+}
+
+// try?  to convert the result to optional : nil if error thrown
+
+let printerFailure = try? send(job: 11100, toPrinter: "Never has a toner")
+
+//defer : executed after all the code just before fucntion returns :
+// its  the setup and cleanup code : even though executed aat different times
+// whether or not function throws the error
+
+var fridgeIsOpen = false
+let fridgeContents = ["milk", "eggs", "leftovers"]
+
+func fridgeContains (_ food:String) -> Bool {
+    fridgeIsOpen = true
+//    defer {
+//        fridgeIsOpen = false
+//    }
+    
+    let result = fridgeContents.contains(food)
+    return result
+}
+
+fridgeContains("banana")
+print(fridgeIsOpen)
+
+// GENERICS
+
+func makeArray<Item>(repeating item:Item, numberOfTimes: Int) -> [Item] {
+    // whatever item is passed generically to the function, it works on the item
+    var result = [Item]()
+    for _ in 0..<numberOfTimes {
+        result.append(item)
+    }
+    return result
+}
+
+makeArray(repeating: "knock", numberOfTimes: 4)
+makeArray(repeating: 3, numberOfTimes: 4)
+
+// generics of functions, methods, classes, structure, enumeration
+
+// Reimplementation of Swift's standard library's optional type
+enum OptionalValue<Wrapped> {
+    case none
+    case some(Wrapped)
+}
+
+var possibleInteger: OptionalValue<Int> = .none
+possibleInteger = .some(100)
+var anotherValue: OptionalValue<String> = .some("My")
+var possibleDouble : OptionalValue<Double> = .some(3.14)
+
+
+// where : given right before the body to specify a list of reqrmnts : to require the type to implement a protocol , to require two types to be the same or to require class to have a particular superclass
+
+func anyCommonElements< T: Sequence, U: Sequence >(_ lhs: T, _ rhs: U) -> Bool where T.Element: Equatable, T.Element == U.Element {
+    for lhsItem in lhs {
+        for rhsItem in rhs {
+            if lhsItem == rhsItem {
+                return true
+            }
+        }
+    }
+    return false
+}
+
+anyCommonElements([7.14,3.5], [3.5])
+
+// Experiment : 19
+
+func getCommonElements< T: Sequence, U: Sequence >(_ lhs: T, _ rhs: U) -> [T.Element] where T.Element: Equatable, T.Element == U.Element {
+    var result:[T.Element] = []
+    for lhsItem in lhs {
+        for rhsItem in rhs {
+            if lhsItem == rhsItem {
+                result.append(lhsItem)
+            }
+        }
+    }
+    return result
+}
+
+getCommonElements([7.14,3.5], [3.5])
+
+
