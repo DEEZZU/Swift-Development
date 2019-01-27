@@ -64,6 +64,39 @@ let maxValue = UInt8.max // + 1 <-  overflow
 
 
 // FLOATING-POINT NUMBERS
+// fractional part
 
+// Double : 64 Bit : 15 decimal digits
+// Float : 32 Bit : 6 decimal digits
+
+
+// TYPE SAFTEY AND TYPE INFERENCE
+// type safe lang: clear about the type of values
+// type checks are performed when compiling code and flags mismatch
+// type inference : swift infer the value type , constants and variables are still typed explicitly
+// use : literal value assigned
+
+
+// NUMERIC LITERALS
+
+// 1. Integer Literals : a decimal with no prefix, binary : 0b, hex : 0x , oct : 0o
+let decimalInteger = 17
+let binaryInteger = 0b1001
+let octalInteger = 0o17
+let hexInteger = 0x17
+
+// 2. Floating Point Literal : decimal with no prefix, hex, values on both side of decimal point , dec floats with e to denote exponent, hex can have an exponent denoted by p (2 ^ exp)
+let decFloat = 1.25e2
+let hexFloat = 0xFp2
+
+// Numeric literals can be formatted : both integers and float can be padded with extra zeroes , can contain underscores to help with readability .
+// Neither type of formatting affects the underlying value of the literal.
+
+let paddedDouble =  000123.456
+let oneMillion = 1_000_000
+let justOverMillion =  1_000_000.000_000_1
+
+
+// NUMERIC TYPE CONVERSION
 
 //: [Next](@next)
