@@ -98,5 +98,50 @@ let justOverMillion =  1_000_000.000_000_1
 
 
 // NUMERIC TYPE CONVERSION
+/*
+Integer Conversion
+let cannotBeNeg:UInt8 = -1 // cannot be neg
+let tooBig:Int8 = Int8.max + 1 // overflow
+*/
+let twoThousand:UInt16 = 2_000
+let one:UInt8 = 1
+let addSum = twoThousand + UInt16(one)
+/* Integer to Float Conversion */
+let three = 3
+let pointValue = 0.14
+let pi = (three) + Int(pointValue)
+/* Numeric literals can be added directly  wihtout type conversion as accompanied in the variables and constants */
 
+
+// TYPE ALIASES
+// an alt name for an existing type
+// typealias keyword can be used
+// helps to maintain the context , working with data of a specified form
+typealias  AudioSample = UInt16
+var maxAmplitude:AudioSample = AudioSample.max
+
+
+// BOOLEANS
+// Bool : logical values : true or false
+let orangeAreOrange = true
+let orangeAreBrown  = false
+// most useful with conditional statements
+
+if orangeAreBrown {
+    print("You are lying!")
+} else {
+    print("We know!!")
+}
+/*
+let i = 1
+if i {}
+type safety ensures to raise an error for non bool types
+*/
+let i = 1
+if i==1{}
+// if Bool(i) {} <- Doesnt work
+
+
+// TUPLES
+/* group multiple values into single compound value */
 //: [Next](@next)
