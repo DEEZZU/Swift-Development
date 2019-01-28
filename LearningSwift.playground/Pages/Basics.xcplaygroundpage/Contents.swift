@@ -98,5 +98,88 @@ let justOverMillion =  1_000_000.000_000_1
 
 
 // NUMERIC TYPE CONVERSION
+/*
+Integer Conversion
+let cannotBeNeg:UInt8 = -1 // cannot be neg
+let tooBig:Int8 = Int8.max + 1 // overflow
+*/
+let twoThousand:UInt16 = 2_000
+let one:UInt8 = 1
+let addSum = twoThousand + UInt16(one)
+/* Integer to Float Conversion */
+let three = 3
+let pointValue = 0.14
+let pi = (three) + Int(pointValue)
+/* Numeric literals can be added directly  wihtout type conversion as accompanied in the variables and constants */
 
+
+// TYPE ALIASES
+// an alt name for an existing type
+// typealias keyword can be used
+// helps to maintain the context , working with data of a specified form
+typealias  AudioSample = UInt16
+var maxAmplitude:AudioSample = AudioSample.max
+
+
+// BOOLEANS
+// Bool : logical values : true or false
+let orangeAreOrange = true
+let orangeAreBrown  = false
+// most useful with conditional statements
+
+if orangeAreBrown {
+    print("You are lying!")
+} else {
+    print("We know!!")
+}
+/*
+let i = 1
+if i {}
+type safety ensures to raise an error for non bool types
+*/
+let i = 1
+if i==1{}
+// if Bool(i) {} <- Doesnt work
+
+
+// TUPLES
+/* group multiple values into single compound value, can be of anytype
+ more suitable for temporary purpose*/
+let httpError = (404, "Not Found") // tuple
+// decomposing tuple
+let (statusCode, statusMessage) = httpError
+print("Error : \(statusCode)")
+print(httpError.0)
+// ignoring parts and acquiring few values
+let (value1, _) = httpError
+print(value1)
+// naming while defining
+let httpErr = (statusCode: 432, statusMessage: "Connect Error")
+print(httpErr.statusCode)
+
+
+// OPTIONALS
+/* A Situation where value may be absent ,situation : value ->  unwrap , or no value
+ can check absence of any type
+ */
+let stringNumber = "123"
+let result = Int(stringNumber)
+var serverResponseCode: Int? = 404
+serverResponseCode = nil // can be assigned to optionals only
+var surveyAns: String?
+surveyAns = "Hello worlds"
+/*  nil is a pointer to a non existing object
+    if stmt and unwrapping
+        if can be used to check whether a value is contained in the optional or it is nil,
+*/
+if result != nil {
+    print ("It was a number and was converted")
+}
+/*  if you are "sure" that "optional has a value" , then you can get it using an ! after the variable name
+    this is known as forced unwrapping
+ */
+if result != nil {
+    print("Result : \(result!)")
+}
+/* Optional Binding */
 //: [Next](@next)
