@@ -143,5 +143,43 @@ if i==1{}
 
 
 // TUPLES
-/* group multiple values into single compound value */
+/* group multiple values into single compound value, can be of anytype
+ more suitable for temporary purpose*/
+let httpError = (404, "Not Found") // tuple
+// decomposing tuple
+let (statusCode, statusMessage) = httpError
+print("Error : \(statusCode)")
+print(httpError.0)
+// ignoring parts and acquiring few values
+let (value1, _) = httpError
+print(value1)
+// naming while defining
+let httpErr = (statusCode: 432, statusMessage: "Connect Error")
+print(httpErr.statusCode)
+
+
+// OPTIONALS
+/* A Situation where value may be absent ,situation : value ->  unwrap , or no value
+ can check absence of any type
+ */
+let stringNumber = "123"
+let result = Int(stringNumber)
+var serverResponseCode: Int? = 404
+serverResponseCode = nil // can be assigned to optionals only
+var surveyAns: String?
+surveyAns = "Hello worlds"
+/*  nil is a pointer to a non existing object
+    if stmt and unwrapping
+        if can be used to check whether a value is contained in the optional or it is nil,
+*/
+if result != nil {
+    print ("It was a number and was converted")
+}
+/*  if you are "sure" that "optional has a value" , then you can get it using an ! after the variable name
+    this is known as forced unwrapping
+ */
+if result != nil {
+    print("Result : \(result!)")
+}
+/* Optional Binding */
 //: [Next](@next)
