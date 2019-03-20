@@ -182,4 +182,6 @@ if result != nil {
     print("Result : \(result!)")
 }
 /* Optional Binding */
+// making the optional value available as a constant or variable available
+
 //: [Next](@next)
